@@ -17,7 +17,8 @@ LINK   = g++ -v -g
 LIBS   = -L./ -lcurl  -lpthread
 
 SRC =	\
-        ./source/main.cpp 
+        ./source/main.cpp \
+	./source/httpClient.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
