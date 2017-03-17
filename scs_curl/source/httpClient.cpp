@@ -1,4 +1,4 @@
-#include "../include/httpClient.h"
+ï»¿#include "../include/httpClient.h"
 
 
 CHttpClient::CHttpClient(void) :   
@@ -49,9 +49,19 @@ static size_t OnWriteData(void* buffer, size_t size, size_t nmemb, void* lpVoid)
     str->append(pData, size * nmemb);  
     return nmemb;  
 }  
-  
+
+/*
+* @brief HTTP POSTè¯·æ±‚ 
+* @param strUrl è¾“å…¥å‚æ•°,è¯·æ±‚çš„Urlåœ°å€,å¦‚:http://www.baidu.com 
+* @param strPost è¾“å…¥å‚æ•°,ä½¿ç”¨å¦‚ä¸‹æ ¼å¼para1=val1Â¶2=val2&â€¦ 
+* @param strResponse è¾“å‡ºå‚æ•°,è¿”å›çš„å†…å®¹ 
+* @return è¿”å›æ˜¯å¦PostæˆåŠŸ
+* @date: 17/3/2017 9:02
+*/  
 int CHttpClient::Post(const std::string & strUrl, const std::string & strPost, std::string & strResponse)  
 {  
+	if( strUrl.empty() )	return -1;
+
     CURLcode res;  
     CURL* curl = curl_easy_init();  
     if(NULL == curl)  
@@ -74,6 +84,7 @@ int CHttpClient::Post(const std::string & strUrl, const std::string & strPost, s
     curl_easy_setopt(curl, CURLOPT_TIMEOUT, 3);  
     res = curl_easy_perform(curl);  
     curl_easy_cleanup(curl);  
+
     return res;  
 }  
   
@@ -96,8 +107,8 @@ int CHttpClient::Get(const std::string & strUrl, std::string & strResponse)
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, OnWriteData);  
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&strResponse);  
     /** 
-    * µ±¶à¸öÏß³Ì¶¼Ê¹ÓÃ³¬Ê±´¦ÀíµÄÊ±ºò£¬Í¬Ê±Ö÷Ïß³ÌÖĞÓĞsleep»òÊÇwaitµÈ²Ù×÷¡£ 
-    * Èç¹û²»ÉèÖÃÕâ¸öÑ¡Ïî£¬libcurl½«»á·¢ĞÅºÅ´ò¶ÏÕâ¸öwait´Ó¶øµ¼ÖÂ³ÌĞòÍË³ö¡£ 
+    * å½“å¤šä¸ªçº¿ç¨‹éƒ½ä½¿ç”¨è¶…æ—¶å¤„ç†çš„æ—¶å€™ï¼ŒåŒæ—¶ä¸»çº¿ç¨‹ä¸­æœ‰sleepæˆ–æ˜¯waitç­‰æ“ä½œã€‚ 
+    * å¦‚æœä¸è®¾ç½®è¿™ä¸ªé€‰é¡¹ï¼Œlibcurlå°†ä¼šå‘ä¿¡å·æ‰“æ–­è¿™ä¸ªwaitä»è€Œå¯¼è‡´ç¨‹åºé€€å‡ºã€‚ 
     */  
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1);  
     curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 3);  
@@ -134,7 +145,7 @@ int CHttpClient::Posts(const std::string & strUrl, const std::string & strPost, 
     }  
     else  
     {  
-        //È±Ê¡Çé¿ö¾ÍÊÇPEM£¬ËùÒÔÎŞĞèÉèÖÃ£¬ÁíÍâÖ§³ÖDER  
+        //ç¼ºçœæƒ…å†µå°±æ˜¯PEMï¼Œæ‰€ä»¥æ— éœ€è®¾ç½®ï¼Œå¦å¤–æ”¯æŒDER  
         //curl_easy_setopt(curl,CURLOPT_SSLCERTTYPE,"PEM");  
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, true);  
         curl_easy_setopt(curl, CURLOPT_CAINFO, pCaPath);  

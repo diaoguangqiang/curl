@@ -17,7 +17,7 @@ LINK   = g++ -v -g
 LIBS   = -L./ -lcurl  -lpthread
 
 SRC =	\
-        ./source/main.cpp \
+        ./source/client.cpp \
 	./source/httpClient.cpp
 
 OBJ = $(SRC:.cpp=.o)
@@ -29,3 +29,4 @@ all: $(OBJ)
 
 clean:
 	rm ./source/*.o
+	rm ./bin/*curl
