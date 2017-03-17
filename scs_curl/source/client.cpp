@@ -15,8 +15,8 @@ int main()
         curl_easy_cleanup(curl);
     }
 */
-	std::string urlstr = "https://www.baidu.com/";
-	std::string urlpost = "";
+	std::string urlstr = "http://localhost:8086/write?db=mydb";
+	std::string urlpost = "cpu,host=server01,region=uswest load=42";
 	std::string response = "";
 
     CHttpClient client;
