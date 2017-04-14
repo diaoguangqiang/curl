@@ -88,8 +88,17 @@ int CHttpClient::Post(const std::string & strUrl, const std::string & strPost, s
     return res;  
 }  
   
+/*
+* @brief HTTP GET请求 
+* @param strUrl 输入参数,请求的Url地址,如:http://127.0.0.1 
+* @param strResponse 输出参数,返回的内容 
+* @return 返回是否Post成功 
+*  @date : 17/3/2017 11:03
+*/
 int CHttpClient::Get(const std::string & strUrl, std::string & strResponse)  
 {  
+	if ( strUrl.empty() ) return -1;
+	
     CURLcode res;  
     CURL* curl = curl_easy_init();  
     if(NULL == curl)  

@@ -7,10 +7,10 @@
 
 CC = gcc
 #CFLAGS =  -g -I.. -I./include  -I$(ACE_ROOT)/include -I$(SYS_ROOT)/include -I$(SCC_REL)/include/scs  -I$(SCC_REL)/include -I$(SCC_REL)/include/sccloud -DTMW_LINUX_TARGET -c
-CFLAGS =  -g -I.. -I./include  
+#CFLAGS =  -g -I.. -I./include  -I$(SYS_ROOT)/3rd
 
 #CXXFLAGS =  -g -I.. -I./include -I$(ACE_ROOT)/include -I$(SYS_ROOT)/include -I$(SCC_REL)/include/scs -I$(SCC_REL)/include/sccloud  -I$(SCC_REL)/3rd/include -I$(SCC_REL)/include -I$(SCC_REL)/include  -DTMW_LINUX_TARGET -c
-CXXFLAGS =  -g -I.. -I./include 
+CXXFLAGS =  -g -I.. -I./include   -I$(SYS_ROOT)/3rd/curl-7.40.0/include
 
 LINK   = g++ -v -g 
 #LIBS   = ../tmwscl/i870.lib ../tmwscl/utils.lib  ../liniotarg.lib -L./ -lcurl  -lpthread
